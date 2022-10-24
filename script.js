@@ -2,6 +2,9 @@ let clicks = 0;
 let gifs = ["bobrossparrot.gif","metalparrot.gif","tripletsparrot.gif","unicornparrot.gif","revertitparrot.gif","fiestaparrot.gif","explodyparrot.gif"];
 let contador = 0;
 cartasSelecionadas = [];
+array = [];
+
+
 let numero = prompt("com quantas cartas deseja jogar?");
 while(numero < 4 || numero > 14 || numero % 2 !== 0){
     numero = prompt("Digite um valor válido");
@@ -23,14 +26,14 @@ function insereCartas(){
     let baralho = ``;
     for (let i = 0; i < cartasSelecionadas.length; i++) {
       baralho += `
-    <div class="card" onclick="virarCarta(this)">
+    <li class="card" onclick="virarCarta(this)">
         <div class="front-face face">
             <img src="./front 2.png" alt="">
         </div>
         <div class="back-face face">
             <img src="${cartasSelecionadas[i]}" alt="">
         </div>
-    </div>`
+    </li>`
     }
     mesa.innerHTML=baralho;
 } 
@@ -40,19 +43,34 @@ function comparador() {
 }
 
 function virarCarta(carta){
-    carta.classList.toggle("virada");
+    carta.classList.add("virada");
+    array.push(carta);
     contador++;
-
     if(contador==2){
-        setTimeout(desvirar,2000);
+        if(array[0].innerHTML !== array[1].innerHTML){
+        setTimeout(desvirar,2000,array[0],array[1]);
+        }
         contador=0;
+        array=[];
+    }
+
+    if(document.querySelectorAll(".virada").length == numero){
+        setTimeout(gameOver,1000);
 
     }
 }
 
-function desvirar(){
-    const cartas = document.querySelectorAll(".virada");
-    for(let i=0;i<cartas.length;i++){
-        cartas[i].classList.remove("virada");
-    }
+function gameOver(){
+    alert("fim de jogo");
+    const mensagem =prompt("jogar novamente?");
+    if(mensagem == "sim"){
+        window.location.reload();
+    }    
+}
+
+
+
+function desvirar(var1,var2){
+    var1.classList.remove("virada");
+    var2.classList.remove("virada");
 }

@@ -22,6 +22,10 @@ body{
   justify-content: space-around;
 }
 
+ul {
+  list-style-type: none;
+}
+
 /* fazer a carta virar */
 
 .card {
@@ -61,6 +65,10 @@ body{
 
   .virada .front-face{
     transform: rotateY(-180deg);
+  }
+
+  .remover{
+    display: none;
   }
 
 @media (max-width: 600px) {
