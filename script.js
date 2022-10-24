@@ -1,6 +1,7 @@
 let clicks = 0;
 let gifs = ["bobrossparrot.gif","metalparrot.gif","tripletsparrot.gif","unicornparrot.gif","revertitparrot.gif","fiestaparrot.gif","explodyparrot.gif"];
 let contador = 0;
+let jogadas = 0;
 cartasSelecionadas = [];
 array = [];
 
@@ -43,12 +44,13 @@ function comparador() {
 }
 
 function virarCarta(carta){
+    jogadas++;
     carta.classList.add("virada");
     array.push(carta);
     contador++;
     if(contador==2){
         if(array[0].innerHTML !== array[1].innerHTML){
-        setTimeout(desvirar,2000,array[0],array[1]);
+        setTimeout(desvirar,1000,array[0],array[1]);
         }
         contador=0;
         array=[];
@@ -61,9 +63,9 @@ function virarCarta(carta){
 }
 
 function gameOver(){
-    alert("fim de jogo");
+    alert(`Você ganhou em ${jogadas} jogadas!`);
     const mensagem =prompt("jogar novamente?");
-    if(mensagem == "sim"){
+    if(mensagem == "sim" || mensagem == "Sim" || mensagem == "SIM"){
         window.location.reload();
     }    
 }
